@@ -4,7 +4,9 @@ $server = "localhost";
 $user = "root";
 $pass = "";
 $db = "rental_car";
-//Connect to MySQL
+
+
+//Connect to MySQL DB
 $conn = mysqli_connect($server, $user, $pass, $db);
 //Check Connection
 if(!$conn) {

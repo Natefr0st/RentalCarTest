@@ -17,6 +17,7 @@ include 'php/config.php';
 include 'php/queries.php';
 
 
+
 ?>
 
 <div class="container">
@@ -26,45 +27,32 @@ include 'php/queries.php';
             <div class="customers-form form-controls">
                 <label for="cars">Select Vehicle</label><br>
                 <select multiple name="cars" id="cars">
-                    <!-- <option value="Opel">Opel</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Nissan">Nissan</option>
-                    <option value="Ford">Ford</option> -->
                     <?php 
-                    
-                    while($row = mysqli_fetch_assoc($result)) {
-                        echo "<option value='".$row['brand']."'>".$row['brand']."</option>";
-                    }
+                        // Fetch data from DB
+                        while($row = mysqli_fetch_assoc($result)) {
+                            echo "<option value='".$row['brand']."'>".$row['brand']."</option>";
+                        }
                     ?>
                 </select>
                 <br>
                 <input class="btn" type="submit" name="submit" value="Submit">
-                <?php
 
-                // $cars = $_GET['cars'];
-                // echo "<br>","<br>";
-                // while($row = mysqli_fetch_assoc($result)) {
-                //     echo $row["first_name"]. " " . $row["brand"] . " " . $row["model"]. " " . $row["hire_date"];
-                //     echo "<br>";
-                // }
 
-                // $selectedCars = $_GET['cars'];
-                
-                // if(mysqli_real_escape_string($conn, $selectedCars)) {
-                //     echo "<br>";
-                //     echo "Error";
-                // }
-                // if(isset($_GET['submit'])) {
-                //     echo "<br>";
-                //     echo $selectedCars;
-                // }
-                
-                // mysqli_real_escape_string($conn, $selectedCars);
+                <?php 
 
-                
+                    $cars = $_GET['cars'];
 
+                    if(isset($_GET['submit'])){
+                        if(isset($_GET['cars'])){
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo $row['first_name']." ".$row['model']." ".$row['brand']." ".$row['brand'];
+                            }
+                        }
+                    }
+                    
                 ?>
+                
+               
             </div>
 
             <div class="cars-form form-controls">
@@ -74,17 +62,6 @@ include 'php/queries.php';
                     <option value="April">April</option>
                 </select><br>
                 <input class="btn" type="submit" name="submit1" value="Submit">
-                
-                <?php 
-                // echo "<br>","<br>";
-
-                // while($row = mysqli_fetch_assoc($result1)) {
-                //     echo $row["brand"]. " " . $row["model"] . " " . $row["colour"]. " " . $row["engine_power"]. " ". $row["hire_date"]. " " . $row["return_date"];
-                //     echo "<br>";
-                // }
-                
-                ?>
-
             </div>
         </form>
     </div>

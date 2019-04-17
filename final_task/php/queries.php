@@ -9,4 +9,5 @@ $sql1 = "SELECT `brand`, `model`, `colour`, `engine_power`, `hire_date`, `return
 
 $result1 = mysqli_query($conn, $sql1);
 
+
 ?>

@@ -14,30 +14,16 @@
 // session_start();
 
 include 'php/config.php';
+include 'php/functions.php';
 
 //QUERIES
 
-$sql = "SELECT `first_name`, `brand`, `model`, `hire_date` FROM `rentals` JOIN customers ON rentals.customer_id = customers.id_customer JOIN vehicles ON rentals.vehicle_id = vehicles.id_vehicle
-";
-$result = mysqli_query($conn, $sql);
-
-$sql1 = "SELECT `brand`, `model`, `colour`, `engine_power`, `hire_date`, `return_date` FROM `vehicles` JOIN `rentals` ON `vehicles`.`id_vehicle`=`rentals`.`id_rental`";
-$result1 = mysqli_query($conn, $sql1);
-
-
-$sql2 = "SELECT `model` FROM `vehicles`";
-$result2 = mysqli_query($conn, $sql2);
+$result = mysqli_query($conn, getQuery());
+$result1 = mysqli_query($conn, getQuery1());
+$result2 = mysqli_query($conn, getQuery2());
 
 // END QUERIES
-function getData(){
-    if(isset($_GET['submit']) && isset($_GET['models'])){
-        if(isset($_GET['cars'])){
-            print_r($_GET['cars']);
-            echo "<br>";
-            print_r($_GET['models']);
-        }
-    }
-}
+
 ?>
 
 <div class="container">
@@ -71,7 +57,7 @@ function getData(){
                 <br>
                 <input class="btn" type="submit" name="submit" value="Submit"><br>
                 <?php
-                    getData();
+                    getVehicle();
                 ?>
             </div>
 

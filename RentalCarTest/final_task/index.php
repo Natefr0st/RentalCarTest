@@ -18,9 +18,10 @@ include 'php/functions.php';
 
 //QUERIES
 
-$result = mysqli_query($conn, getQuery());
-$result1 = mysqli_query($conn, getQuery1());
-$result2 = mysqli_query($conn, getQuery2());
+$result = mysqli_query($conn, getQuery()) or die('Error: Query error');
+$result1 = mysqli_query($conn, getQuery1()) or die('Error: Query error');
+$result2 = mysqli_query($conn, getQuery2()) or die('Error: Query error');
+$result3 = mysqli_query($conn, getQuery3()) or die('Error: Query error');
 
 // END QUERIES
 
@@ -35,12 +36,12 @@ $result2 = mysqli_query($conn, getQuery2());
                 <select name="cars" id="cars">
                     <?php 
                     //Populate dropdown menu from DB
-                        $brands = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        $brands = mysqli_fetch_all($result3, MYSQLI_ASSOC);
                         foreach($brands as $brand){
                             echo "<option value='".$brand['brand']."'>".$brand['brand']."</option>";
                         }
                         //Free result from memory
-                        mysqli_free_result($result);
+                        mysqli_free_result($result3);
                     ?>
                 </select>
                 <select name="models" id="models">
@@ -55,8 +56,35 @@ $result2 = mysqli_query($conn, getQuery2());
                     ?>
                 </select>
                 <br>
+                <label for="date">Select Date</label><br>
+                <input checked type="radio" name="date" id="date">March
+                <input type="radio" name="date" id="date">April
+                <br>
                 <input class="btn" type="submit" name="submit" value="Submit"><br>
                 <?php
+                //Render results to browser
+                    if(isset($_GET['submit'])){
+                        $result = mysqli_query($conn, getQuery()) or die('error');
+                    
+                        echo "<table border='1' style='margin: 0 auto; margin-top: 15px'>";
+                        echo "<tr> <th>First Name</th><th>Brand</th><th>Model</th><th>Hire Date</th> </tr>";
+                    
+                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                    
+                            echo "<tr><td>";
+                            echo $row['first_name'];
+                            echo "</td><td>";
+                            echo $row['brand'];
+                            echo "</td><td>";
+                            echo $row['model'];
+                            echo "</td><td>";
+                            echo $row['hire_date'];
+                            echo "</td></tr>";
+                    
+                        }
+                    
+                        echo "</table>";
+                    }
                     getVehicle();
                 ?>
             </div>

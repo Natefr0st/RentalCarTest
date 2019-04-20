@@ -31,4 +31,8 @@ function getQuery2(){
     return $sql2;
 }
 
+function getQuery3(){
+    $sql3 = "SELECT `brand` FROM `vehicles`";
+    return $sql3;
+}
 ?>
